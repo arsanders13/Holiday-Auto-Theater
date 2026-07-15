@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holiday Auto Theater | Admin Control Room</title>
+  <meta name="description" content="Manage listings, operating days, showtimes, and announcements for the Holiday Auto Theater.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Limelight&family=Lobster&family=Monoton&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Header Diner Sign style -->
+  <header class="admin-header">
+    <div class="header-container">
+      <div class="chrome-rim">
+        <div class="sign-inner">
+          <div class="neon-stars">
+            <span class="star star-left">★</span>
+            <h1 class="admin-title">Control Room</h1>
+            <span class="star star-right">★</span>
+          </div>
+          <p class="admin-subtitle">Holiday Auto Theater Management Board</p>
+        </div>
+      </div>
+      <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Main Site</a>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    
+    <!-- SECTION 1: GLOBAL CONTROL PANEL -->
+    <section class="admin-section chrome-panel">
+      <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> General Settings</h2>
+      
+      <!-- Announcement Editor -->
+      <div class="form-group">
+        <label for="announcement-input"><i class="fa-solid fa-bullhorn icon-yellow"></i> Marquee Announcement Ticker</label>
+        <input type="text" id="announcement-input" placeholder="Type scrolling marquee alert here..." required>
+        <p class="input-desc">This scrolls across the very top of the homepage in gold neon letters.</p>
+      </div>
+
+      <!-- Weekly Schedule Switches -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-calendar-check icon-turquoise"></i> Weekly Operating Days</label>
+        <p class="input-desc">Toggle whether the drive-in is Open or Closed for each day of the current week.</p>
+        <div class="day-toggle-grid">
+          <!-- Mon -->
+          <div class="day-toggle-card" data-day="MON">
+            <span class="toggle-day-name">MON</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-MON" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-MON">Open</span>
+          </div>
+          <!-- Tue -->
+          <div class="day-toggle-card" data-day="TUE">
+            <span class="toggle-day-name">TUE</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-TUE" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-TUE">Open</span>
+          </div>
+          <!-- Wed -->
+          <div class="day-toggle-card" data-day="WED">
+            <span class="toggle-day-name">WED</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-WED">
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-WED">Closed</span>
+          </div>
+          <!-- Thu -->
+          <div class="day-toggle-card" data-day="THU">
+            <span class="toggle-day-name">THU</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-THU" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-THU">Open</span>
+          </div>
+          <!-- Fri -->
+          <div class="day-toggle-card" data-day="FRI">
+            <span class="toggle-day-name">FRI</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-FRI" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-FRI">Open</span>
+          </div>
+          <!-- Sat -->
+          <div class="day-toggle-card" data-day="SAT">
+            <span class="toggle-day-name">SAT</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-SAT" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-SAT">Open</span>
+          </div>
+          <!-- Sun -->
+          <div class="day-toggle-card" data-day="SUN">
+            <span class="toggle-day-name">SUN</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="status-SUN" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="status-lbl" id="lbl-SUN">Open</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CURRENT MOVIE LISTINGS -->
+    <section class="admin-section chrome-panel">
+      <div class="section-header-flex">
+        <h2 class="panel-title"><i class="fa-solid fa-film"></i> Current Movie Schedule</h2>
+        <button type="button" class="diner-btn btn-green" id="btn-show-add-modal">
+          <i class="fa-solid fa-plus"></i> Add New Movie
+        </button>
+      </div>
+      
+      <p class="input-desc">Drag or manage movies showing on the screen this week. Renders directly onto the screen.</p>
+      
+      <div class="admin-movie-list" id="admin-movie-list">
+        <!-- Rendered dynamically by admin.js -->
+        <div class="loading-spinner">Loading current movie listings...</div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SAVE AND DEPLOY -->
+    <section class="admin-section chrome-panel save-deploy-panel">
+      <h2 class="panel-title"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Deploy Changes</h2>
+      <p class="input-desc">Select how you want to apply the updates to your drive-in theater website.</p>
+      
+      <div class="deploy-options-grid">
+        
+        <!-- Local Preview -->
+        <div class="deploy-card">
+          <div class="deploy-card-icon icon-yellow"><i class="fa-solid fa-desktop"></i></div>
+          <h3>1. Local Preview</h3>
+          <p>Save changes temporarily in your web browser. Perfect for testing and seeing how it looks locally before making it permanent.</p>
+          <button type="button" class="deploy-btn btn-neon-yellow" id="btn-local-preview">
+            <i class="fa-solid fa-play"></i> Preview locally
+          </button>
+        </div>
+
+        <!-- Download Config -->
+        <div class="deploy-card">
+          <div class="deploy-card-icon icon-turquoise"><i class="fa-solid fa-download"></i></div>
+          <h3>2. Download Config File</h3>
+          <p>Download the updated <code>data.json</code> file. You can drag-and-drop this file into your GitHub repository to update the site manually.</p>
+          <button type="button" class="deploy-btn btn-neon-turquoise" id="btn-download-config">
+            <i class="fa-solid fa-file-arrow-down"></i> Download JSON
+          </button>
+        </div>
+
+        <!-- GitHub Deploy -->
+        <div class="deploy-card github-sync-card">
+          <div class="deploy-card-icon icon-pink"><i class="fa-brands fa-github"></i></div>
+          <h3>3. Direct GitHub Sync</h3>
+          <p>Automatically commit changes directly to your GitHub repository using a Personal Access Token. Updates the live website for everyone in 30 seconds.</p>
+          
+          <div class="github-inputs-group">
+            <div class="field-row">
+              <label for="gh-username">GitHub Username</label>
+              <input type="text" id="gh-username" placeholder="e.g. coder123">
+            </div>
+            <div class="field-row">
+              <label for="gh-repo">Repository Name</label>
+              <input type="text" id="gh-repo" placeholder="e.g. holiday-auto-theater">
+            </div>
+            <div class="field-row">
+              <label for="gh-token">Personal Access Token (PAT)</label>
+              <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxx">
+            </div>
+            <div class="field-row checkbox-row">
+              <input type="checkbox" id="gh-save-details" checked>
+              <label for="gh-save-details">Save credentials securely on this computer</label>
+            </div>
+          </div>
+
+          <button type="button" class="deploy-btn btn-neon-pink" id="btn-github-deploy">
+            <i class="fa-solid fa-globe"></i> Publish Live Site
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ADD MOVIE MODAL DIALOG -->
+  <div class="modal-overlay hidden" id="add-movie-modal">
+    <div class="modal-chrome-rim">
+      <div class="modal-box">
+        
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-video"></i> Add Movie Details</h3>
+          <button class="modal-close-btn" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- OMDb/IMDb Search Bar -->
+        <div class="omdb-search-box">
+          <h4><i class="fa-brands fa-imdb icon-imdb"></i> Auto-Fill from IMDb / Movie Database</h4>
+          <div class="search-fields-row">
+            <div class="search-input-wrap">
+              <input type="text" id="omdb-search-title" placeholder="Type movie title (e.g. Jurassic Park)...">
+            </div>
+            <button type="button" class="diner-btn btn-yellow" id="btn-omdb-search">
+              <i class="fa-solid fa-magnifying-glass"></i> Search API
+            </button>
+          </div>
+          
+          <!-- Key Option (Optional, defaults to fallback) -->
+          <div class="api-key-toggle-row">
+            <a href="http://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener noreferrer" class="key-info-link"><i class="fa-solid fa-circle-question"></i> Get your own free OMDb API Key</a>
+            <input type="text" id="omdb-api-key" placeholder="Enter key (Optional)" value="8e6c7c0c">
+          </div>
+          
+          <!-- Search Status / Result Alert -->
+          <div class="search-alert hidden" id="search-alert"></div>
+        </div>
+
+        <!-- Add/Edit Movie Form -->
+        <form id="add-movie-form">
+          <input type="hidden" id="movie-index"> <!-- Set if editing an existing movie -->
+          
+          <div class="form-grid-2">
+            
+            <!-- Poster Preview Area -->
+            <div class="poster-preview-col">
+              <div class="poster-placeholder" id="modal-poster-preview">
+                <i class="fa-solid fa-image"></i>
+                <p>Poster Preview</p>
+              </div>
+              <div class="form-group margin-top-10">
+                <label for="movie-poster">Poster Image URL</label>
+                <input type="text" id="movie-poster" placeholder="assets/name.jpg or web link" required>
+              </div>
+            </div>
+
+            <!-- Metadata Details Column -->
+            <div class="metadata-col">
+              
+              <div class="form-row-split">
+                <div class="form-group">
+                  <label for="movie-title">Movie Title</label>
+                  <input type="text" id="movie-title" placeholder="e.g. Jaws" required>
+                </div>
+                <div class="form-group shrink-field">
+                  <label for="movie-year">Year</label>
+                  <input type="text" id="movie-year" placeholder="1975" required>
+                </div>
+              </div>
+
+              <div class="form-row-split">
+                <div class="form-group">
+                  <label for="movie-genre">Genre(s)</label>
+                  <input type="text" id="movie-genre" placeholder="e.g. Thriller / Adventure" required>
+                </div>
+                <div class="form-group shrink-field">
+                  <label for="movie-rating">Rating</label>
+                  <input type="text" id="movie-rating" placeholder="PG" required>
+                </div>
+                <div class="form-group shrink-field">
+                  <label for="movie-duration">Runtime</label>
+                  <input type="text" id="movie-duration" placeholder="2h 4m" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="movie-plot">Plot Summary</label>
+                <textarea id="movie-plot" rows="3" placeholder="Write plot description..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="movie-imdb">IMDb Link URL</label>
+                <input type="url" id="movie-imdb" placeholder="https://www.imdb.com/title/..." required>
+              </div>
+
+            </div>
+          </div>
+
+          <hr class="modal-divider">
+
+          <!-- Scheduling Settings Section -->
+          <h4 class="settings-sub"><i class="fa-solid fa-clock-rotate-left"></i> Drive-In Showtimes & Features</h4>
+          
+          <div class="form-grid-2 scheduling-grid">
+            <div class="feature-ordering-field">
+              <label>Double Feature Settings</label>
+              <div class="radio-toggle-group">
+                <label class="radio-lbl">
+                  <input type="radio" name="feature-type" value="First Feature" checked>
+                  <span>First Feature (9:00 PM)</span>
+                </label>
+                <label class="radio-lbl">
+                  <input type="radio" name="feature-type" value="Second Feature">
+                  <span>Second Feature (11:00 PM)</span>
+                </label>
+                <label class="radio-lbl">
+                  <input type="radio" name="feature-type" value="Single Feature">
+                  <span>Single/Special Event</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="showtimes-builder">
+              <label>Showtime Schedule (e.g. Fri-Sun: 9:00 PM)</label>
+              <div id="showtimes-rows-container">
+                <!-- Showtime entries will be added here -->
+              </div>
+              <button type="button" class="add-time-btn" id="btn-add-time-row">
+                <i class="fa-solid fa-plus-circle"></i> Add Showtime Rule
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="diner-btn btn-red" id="btn-cancel-modal">Cancel</button>
+            <button type="submit" class="diner-btn btn-green" id="btn-save-movie">Add Movie to Schedule</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Banner -->
+  <div class="notification-toast hidden" id="toast">
+    <i class="fa-solid fa-circle-check"></i> <span id="toast-message">Action completed successfully.</span>
+  </div>
+
+  <!-- Custom Admin Script -->
+  <script src="admin.js"></script>
+</body>
+</html>

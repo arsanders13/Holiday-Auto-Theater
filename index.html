@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holiday Auto Theater | Classic Retro Drive-In</title>
+  <meta name="description" content="Experience the magic of the movies under the stars at Holiday Auto Theater. Classic throwback 1950s drive-in theater showing movies Thursday-Tuesday. Good food, nostalgic vibes, and family fun!">
+  
+  <!-- Google Fonts for retro throwback vibe -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Limelight&family=Lobster&family=Monoton&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Retro Announcement Ticker -->
+  <div class="marquee-ticker">
+    <div class="marquee-content">
+      <span>★ NOW SHOWING • CHECK WEEKLY SCHEDULE GRID BELOW FOR OPEN DAYS ★ SOUND ON 88.3 FM ★ GATES OPEN AT 7:30 PM ★ SHOWTIME AT DUSK ★ POPCORN IS POPPING! ★</span>
+      <span>★ NOW SHOWING • CHECK WEEKLY SCHEDULE GRID BELOW FOR OPEN DAYS ★ SOUND ON 88.3 FM ★ GATES OPEN AT 7:30 PM ★ SHOWTIME AT DUSK ★ POPCORN IS POPPING! ★</span>
+    </div>
+  </div>
+
+  <!-- Giant Retro Neon Sign / Billboard Header -->
+  <header class="theater-header">
+    <div class="neon-sign-container">
+      <div class="neon-border-outer">
+        <div class="neon-border-inner">
+          <div class="stars-accents">
+            <span class="star star-1">★</span>
+            <span class="star star-2">★</span>
+            <span class="star star-3">★</span>
+          </div>
+          <h1 class="neon-title-main">Holiday</h1>
+          <h2 class="neon-title-sub">Auto Theater</h2>
+          <div class="neon-tagline">🍿 MOVIES UNDER THE STARS 🍿</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation: Styled like a Retro Diner Menu or Chrome Sign -->
+  <nav class="diner-nav">
+    <div class="checkerboard-trim top"></div>
+    <ul class="nav-links">
+      <li>
+        <button class="nav-btn active" id="btn-showing" data-tab="tab-showing">
+          <i class="fa-solid fa-film"></i> Now Showing
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-directions" data-tab="tab-directions">
+          <i class="fa-solid fa-map-location-dot"></i> Directions
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-guidelines" data-tab="tab-guidelines">
+          <i class="fa-solid fa-circle-info"></i> Guidelines
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-snackbar" data-tab="tab-snackbar">
+          <i class="fa-solid fa-hotdog"></i> Snack Bar
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-gallery" data-tab="tab-gallery">
+          <i class="fa-solid fa-images"></i> Gallery
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-links" data-tab="tab-links">
+          <i class="fa-solid fa-link"></i> Links
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" id="btn-contact" data-tab="tab-contact">
+          <i class="fa-solid fa-envelope"></i> Contact Us
+        </button>
+      </li>
+    </ul>
+    <div class="checkerboard-trim bottom"></div>
+  </nav>
+
+  <!-- Main Website Content -->
+  <main class="main-content">
+    
+    <!-- SECTION 1: NOW SHOWING -->
+    <section id="tab-showing" class="tab-content active-tab">
+      <div class="section-title-wrap">
+        <h3 class="section-title">On the Big Screen This Week</h3>
+        <p class="section-subtitle">Gates open at 7:30 PM. Double features begin at dusk (approx. 9:00 PM).</p>
+      </div>
+
+      <!-- Schedule Table/Grid -->
+      <div class="schedule-card">
+        <h4 class="card-header"><i class="fa-solid fa-calendar-days"></i> Weekly Schedule Grid</h4>
+        <div class="schedule-days-grid" id="schedule-days-grid">
+          <!-- Injected dynamically by JavaScript -->
+        </div>
+        <p class="schedule-note">* Operating days vary. Check the schedule grid above for this week's active show dates.</p>
+      </div>
+
+      <!-- Dynamic Movie List Container -->
+      <div id="movie-listings" class="movie-listings-grid">
+        <!-- Injected dynamically by JavaScript, but has fallback static HTML for SEO/accessibility -->
+        <div class="movie-card loading-card">
+          <p>Loading tonight's double features...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DIRECTIONS -->
+    <section id="tab-directions" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">Find Your Way Here</h3>
+        <p class="section-subtitle">Pack the car and navigate to Holiday Auto Theater!</p>
+      </div>
+
+      <div class="directions-container">
+        <!-- Stylized Retro Diner Map -->
+        <div class="directions-map-panel">
+          <div class="map-billboard">
+            <div class="map-placeholder-image" id="map-canvas">
+              <!-- Styled retro map design -->
+              <div class="retro-map-graphic">
+                <i class="fa-solid fa-map-location-dot map-icon"></i>
+                <div class="map-pins">
+                  <div class="theater-pin"><i class="fa-solid fa-star"></i> Holiday Auto Theater</div>
+                </div>
+                <div class="map-street-label street-1">Hamilton-Richmond Rd (Route 127)</div>
+                <div class="map-street-label street-2">Oxford State Rd</div>
+              </div>
+            </div>
+            <div class="address-footer">
+              <p class="address-text"><i class="fa-solid fa-location-dot"></i> 1816 Old Oxford Road, Hamilton, OH 45013</p>
+              <a href="https://maps.google.com/?q=1816+Old+Oxford+Road+Hamilton+OH" target="_blank" rel="noopener noreferrer" class="retro-btn btn-neon-blue" id="lnk-google-maps">
+                <i class="fa-solid fa-route"></i> Get Google Map Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Driving instructions -->
+        <div class="directions-text-panel">
+          <div class="info-card">
+            <h4><i class="fa-solid fa-car-side"></i> Driving Directions</h4>
+            <div class="direction-step">
+              <h5>From the North (Dayton Area):</h5>
+              <p>Take I-75 South to Exit 24 (Route 129 West) toward Hamilton. Follow 129 West into Hamilton, cross the river, and turn right onto B Street/Route 127 North. Follow 127 North for approximately 3 miles, then turn left onto Old Oxford Road. The theater is 1.5 miles down on the right.</p>
+            </div>
+            <hr class="card-divider">
+            <div class="direction-step">
+              <h5>From the South (Cincinnati Area):</h5>
+              <p>Take I-275 to the Route 127 North exit. Follow 127 North through Hamilton. Once you pass through downtown Hamilton, continue North on 127 for 3 miles, then turn left onto Old Oxford Road. We are 1.5 miles ahead on your right-hand side.</p>
+            </div>
+            <hr class="card-divider">
+            <div class="direction-step">
+              <h5>From the West (Oxford / Miami Univ.):</h5>
+              <p>Take Route 27 South out of Oxford toward McGonigle. Turn left onto Queen Road, then right onto Old Oxford Road. Continue straight on Old Oxford Road for about 5 miles. The theater marquee will be on your left side.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: GUIDELINES -->
+    <section id="tab-guidelines" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">Drive-In Ground Rules</h3>
+        <p class="section-subtitle">Help us keep the nostalgic drive-in experience safe and fun for everyone!</p>
+      </div>
+
+      <div class="guidelines-layout">
+        <!-- Left Banner: Classic Movie Theater Rules Poster -->
+        <div class="rules-card">
+          <h4 class="rules-header">🎬 Drive-In Etiquette & Rules</h4>
+          <ul class="rules-list">
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-volume-high"></i></span>
+              <div class="rule-detail">
+                <strong>Movie Sound via FM Radio:</strong>
+                <p>Sound is broadcast on <strong>88.3 FM</strong>. You can use your car radio or bring a portable FM radio. Keep your key in the accessory position to avoid draining your battery.</p>
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-gauge"></i></span>
+              <div class="rule-detail">
+                <strong>Speed Limit is 5 MPH:</strong>
+                <p>Always watch for children walking to/from the snack bar. Drive extremely slowly and keep headlights off once inside the theater rows.</p>
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-lightbulb"></i></span>
+              <div class="rule-detail">
+                <strong>Turn Off Headlights:</strong>
+                <p>Your vehicle's headlights, running lights, and interior dome lights must remain OFF during the show. Use a blanket to cover dashboard lights if they cannot be turned off.</p>
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-arrows-up-down-left-right"></i></span>
+              <div class="rule-detail">
+                <strong>Parking & Vehicle Size:</strong>
+                <p>Large vehicles, trucks, SUVs, and vans must park in designated back rows (rows 12 and higher) so they do not block the view of smaller cars parked in front.</p>
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-ban"></i></span>
+              <div class="rule-detail">
+                <strong>No Outside Food Policy:</strong>
+                <p>We rely on our Snack Bar sales to keep ticket prices low and keep the theater open. Please support our Snack Bar! If you bring outside food, a $10 permit fee is required at the box office.</p>
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon"><i class="fa-solid fa-dog"></i></span>
+              <div class="rule-detail">
+                <strong>Pets are Welcome:</strong>
+                <p>Dogs are permitted on leash at all times. Please clean up after your pet. Pets are not allowed inside the Snack Bar building.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Tips and FAQ -->
+        <div class="rules-tips-sidebar">
+          <div class="info-card tip-card">
+            <h4>💡 Pro Tips for a Great Night</h4>
+            <ul class="diner-list">
+              <li><strong>Pack Blankets & Pillows:</strong> Even in summer, nights can get cool. Back your SUV in and set up a cozy viewing lounge in the trunk!</li>
+              <li><strong>Bring Bug Spray:</strong> Keep the mosquitos away while sitting outside in lawn chairs.</li>
+              <li><strong>Dead Battery assistance:</strong> If your car battery dies from running the radio, visit the box office or snack bar. We have free jump-starts available!</li>
+              <li><strong>Arrive Early:</strong> Popular double features fill up fast on Friday and Saturday nights. Arrive by 7:30 PM to secure the best spot.</li>
+            </ul>
+          </div>
+          
+          <div class="info-card radio-card">
+            <div class="radio-dial-mockup">
+              <span class="radio-title">FM RADIO TUNING</span>
+              <div class="radio-frequency">88.3 <span class="fm-unit">MHz</span></div>
+              <p>Tune in for crystal-clear theater audio directly through your car speakers!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SNACK BAR -->
+    <section id="tab-snackbar" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">The Retro Snack Bar</h3>
+        <p class="section-subtitle">Delicious hot food, fresh popcorn, and ice-cold drinks since 1947.</p>
+      </div>
+
+      <div class="menu-board-container">
+        <!-- Main Vintage Menu -->
+        <div class="retro-menu-board">
+          <div class="menu-chrome-rim">
+            <div class="menu-header-neon">
+              <span class="menu-neon-text">SNACKS & SODA</span>
+            </div>
+            
+            <div class="menu-content-grid">
+              
+              <!-- Category 1: Hot Food -->
+              <div class="menu-category">
+                <h4 class="menu-cat-title">★ HOT & FRESH EATS ★</h4>
+                <ul class="menu-items-list">
+                  <li>
+                    <span class="item-name">Jumbo Hot Dog</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.50</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Chili Cheese Dog</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$4.25</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Warm Nachos with Cheese</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$4.00</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Soft Pretzel with Salt</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.00</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Add Warm Cheese Dip</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$0.75</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Category 2: Popcorn & Candy -->
+              <div class="menu-category">
+                <h4 class="menu-cat-title">★ THE CLASSICS ★</h4>
+                <ul class="menu-items-list">
+                  <li>
+                    <span class="item-name">Buttered Popcorn - Small</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.75</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Buttered Popcorn - Large</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$5.50</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Buttered Popcorn - Souvenir Tub</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$8.00</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Movie Candy Box (M&Ms, Junior Mints, etc.)</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.50</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Red Vines Licorice</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.25</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Category 3: Drinks & Shakes -->
+              <div class="menu-category">
+                <h4 class="menu-cat-title">★ ICE COLD DRINKS ★</h4>
+                <ul class="menu-items-list">
+                  <li>
+                    <span class="item-name">Fountain Soda - Regular (24oz)</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$3.25</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Fountain Soda - Large (32oz)</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$4.50</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Milkshake (Chocolate, Vanilla, Strawberry)</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$5.00</span>
+                  </li>
+                  <li>
+                    <span class="item-name">Bottled Water</span>
+                    <span class="item-dots"></span>
+                    <span class="item-price">$2.00</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Payment Info Diner Style -->
+              <div class="menu-payment-info">
+                <div class="payment-card-inner">
+                  <h5>💳 PAYMENT METHODS ACCEPTED</h5>
+                  <div class="payment-icons-flex">
+                    <span class="payment-method"><i class="fa-solid fa-money-bill-1-wave"></i> Cash</span>
+                    <span class="payment-method"><i class="fa-regular fa-credit-card"></i> Credit / Debit</span>
+                    <span class="payment-method"><i class="fa-brands fa-apple-pay"></i> Apple Pay</span>
+                    <span class="payment-method"><i class="fa-brands fa-google-pay"></i> Google Pay</span>
+                  </div>
+                  <p class="payment-note">Note: Outside food and drink is prohibited unless you purchase a $10 Food Permit at the Box Office ticket booth. Support our theater - buy snacks here!</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: GALLERY -->
+    <section id="tab-gallery" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">Drive-In Photo Gallery</h3>
+        <p class="section-subtitle">Take a peek at the nostalgic atmosphere of Ohio's classic drive-in.</p>
+      </div>
+
+      <div class="gallery-grid" id="photo-gallery">
+        <!-- Polaroid 1 -->
+        <div class="polaroid-frame">
+          <div class="polaroid-img-container">
+            <img src="assets/gallery_drive_in_marquee.jpg" alt="Holiday Auto Theater Neon Sign" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Our Historic Neon Sign</div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="polaroid-frame">
+          <div class="polaroid-img-container">
+            <img src="assets/gallery_projector_booth.jpg" alt="Vintage Drive In Projector Room" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Inside the Projector Room</div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="polaroid-frame">
+          <div class="polaroid-img-container">
+            <img src="assets/gallery_snack_bar.jpg" alt="1950s Style Snack Bar Sign" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">The Neon Snack Bar</div>
+        </div>
+
+        <!-- Polaroid 4 -->
+        <div class="polaroid-frame">
+          <div class="polaroid-img-container">
+            <img src="assets/gallery_cars_sunset.jpg" alt="Retro cars parked at drive-in theater at sunset" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Ready for the Movie!</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: LINKS -->
+    <section id="tab-links" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">Useful Drive-In Links</h3>
+        <p class="section-subtitle">Ticketing portals, weather checkers, and social media hubs.</p>
+      </div>
+
+      <div class="links-cards-grid">
+        <!-- Link Card 1 -->
+        <a href="https://www.holidayautotheater.com/tickets-placeholder" target="_blank" rel="noopener noreferrer" class="link-card" id="lnk-tickets">
+          <div class="link-card-icon"><i class="fa-solid fa-ticket-simple"></i></div>
+          <h4>Online Ticketing Portal</h4>
+          <p>Skip the box office lines! Purchase admission tickets and food permits online in advance.</p>
+          <span class="link-card-action">Visit Portal <i class="fa-solid fa-arrow-right-long"></i></span>
+        </a>
+
+        <!-- Link Card 2 -->
+        <a href="https://weather.com/weather/tenday/l/Hamilton+OH" target="_blank" rel="noopener noreferrer" class="link-card" id="lnk-weather">
+          <div class="link-card-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+          <h4>Hamilton Weather Forecast</h4>
+          <p>We play movies rain or shine! Check the local Hamilton, OH weather to dress appropriately for the evening.</p>
+          <span class="link-card-action">Check Weather <i class="fa-solid fa-arrow-right-long"></i></span>
+        </a>
+
+        <!-- Link Card 3 -->
+        <a href="https://www.facebook.com/HolidayAutoTheater/" target="_blank" rel="noopener noreferrer" class="link-card" id="lnk-facebook">
+          <div class="link-card-icon"><i class="fa-brands fa-facebook"></i></div>
+          <h4>Our Facebook Community</h4>
+          <p>Get the absolute latest updates, schedule changes, contests, and special event announcements.</p>
+          <span class="link-card-action">View Facebook <i class="fa-solid fa-arrow-right-long"></i></span>
+        </a>
+
+        <!-- Link Card 4 -->
+        <a href="https://www.instagram.com/explore/tags/holidayautotheater/" target="_blank" rel="noopener noreferrer" class="link-card" id="lnk-instagram">
+          <div class="link-card-icon"><i class="fa-brands fa-instagram"></i></div>
+          <h4>Instagram Fan Photos</h4>
+          <p>Tag us in your photos! Check out how other families, retro car clubs, and movie buffs experience the Holiday.</p>
+          <span class="link-card-action">View Instagram <i class="fa-solid fa-arrow-right-long"></i></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 7: CONTACT US -->
+    <section id="tab-contact" class="tab-content">
+      <div class="section-title-wrap">
+        <h3 class="section-title">Drop Us a Line</h3>
+        <p class="section-subtitle">Have questions about showtimes, group events, or birthday parties? Send us a message!</p>
+      </div>
+
+      <div class="contact-form-layout">
+        <!-- Postcard Form -->
+        <div class="postcard-wrapper">
+          <div class="postcard-front">
+            <div class="postcard-stamp">
+              <span class="stamp-icon">🍿</span>
+              <span class="stamp-price">1950s</span>
+            </div>
+            
+            <form id="contact-form" class="postcard-form-grid">
+              <!-- Left Side: Message -->
+              <div class="postcard-message-area">
+                <label for="contact-message">Dear Holiday Auto Theater,</label>
+                <textarea id="contact-message" name="message" placeholder="Write your message here... I love the popcorn! Can you show classic horror movies next week?..." required></textarea>
+                <span class="postcard-signature">- Your Friendly Neighbor</span>
+              </div>
+              
+              <!-- Right Side: Address & Details -->
+              <div class="postcard-address-area">
+                <div class="postcard-divider-line"></div>
+                
+                <div class="postcard-input-group">
+                  <input type="text" id="contact-name" name="name" placeholder="Name" required>
+                </div>
+                
+                <div class="postcard-input-group">
+                  <input type="email" id="contact-email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="postcard-input-group">
+                  <input type="text" id="contact-subject" name="subject" placeholder="Regarding (Subject)" required>
+                </div>
+                
+                <div class="postcard-address-mock">
+                  <p class="theater-mock-address">Holiday Auto Theater</p>
+                  <p class="theater-mock-address">1816 Old Oxford Road</p>
+                  <p class="theater-mock-address">Hamilton, OH 45013</p>
+                </div>
+
+                <button type="submit" class="postcard-send-btn" id="btn-submit-message">
+                  <span>SEND POSTCARD</span> <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+
+            <!-- Success Overlay -->
+            <div id="form-success-overlay" class="form-success-overlay hidden">
+              <div class="success-content">
+                <div class="success-stamp-mark"><i class="fa-solid fa-stamp"></i> SENT</div>
+                <h3>Postcard Sent!</h3>
+                <p>Thank you for reaching out! We'll reply to your email address as soon as we finish sweeping the drive-in lanes.</p>
+                <button type="button" class="retro-btn btn-neon-pink" id="btn-success-reset">Send Another Message</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer with copyright and FM tuning alert -->
+  <footer class="theater-footer">
+    <div class="footer-checkerboard"></div>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Holiday Auto Theater</h3>
+        <p>1816 Old Oxford Road, Hamilton, OH 45013 • Box Office: (513) 929-2999</p>
+        <p class="footer-radio"><i class="fa-solid fa-radio"></i> Broadcast Frequency: <strong>88.3 FM</strong></p>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-copyright">
+        <p>&copy; 2026 Holiday Auto Theater. All Rights Reserved. Built with Nostalgia.</p>
+        <p class="developer-note">Celebrating over 75 years of movies under the stars!</p>
+        <p class="developer-note" style="margin-top: 8px; font-size: 0.85rem;"><a href="admin.html" id="lnk-admin" style="text-decoration: underline; color: inherit; opacity: 0.7;"><i class="fa-solid fa-sliders"></i> Admin Control Room</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

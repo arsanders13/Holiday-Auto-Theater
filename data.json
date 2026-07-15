@@ -1,0 +1,54 @@
+{
+  "weeklyStatus": {
+    "MON": "Open",
+    "TUE": "Open",
+    "WED": "Closed",
+    "THU": "Open",
+    "FRI": "Open",
+    "SAT": "Open",
+    "SUN": "Open"
+  },
+  "announcement": "★ NOW SHOWING • CHECK WEEKLY SCHEDULE GRID BELOW FOR OPEN DAYS ★ SOUND ON 88.3 FM ★ GATES OPEN AT 7:30 PM ★ SHOWTIME AT DUSK ★ POPCORN IS POPPING! ★",
+  "movies": [
+    {
+      "title": "Obsession",
+      "year": "2026",
+      "rating": "R",
+      "genre": "Horror",
+      "duration": "108m",
+      "plot": "After breaking the mysterious 'One Wish Willow' to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+      "imdbLink": "https://www.imdb.com/title/tt37287335",
+      "posterImage": "assets/141_obsession.jpg",
+      "isDoubleFeature": true,
+      "featureOrder": "First Feature",
+      "showtimes": [
+        {
+          "days": "Thurs",
+          "time": "9:20 PM"
+        }
+      ]
+    },
+    {
+      "title": "Grease",
+      "year": "1978",
+      "rating": "PG",
+      "genre": "Musical / Romance",
+      "duration": "1h 50m",
+      "plot": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+      "imdbLink": "https://www.imdb.com/title/tt0077631/",
+      "posterImage": "assets/poster_grease.jpg",
+      "isDoubleFeature": true,
+      "featureOrder": "Second Feature",
+      "showtimes": [
+        {
+          "days": "Fri - Sun",
+          "time": "11:10 PM"
+        },
+        {
+          "days": "Mon, Tue, Thu",
+          "time": "11:15 PM"
+        }
+      ]
+    }
+  ]
+}
