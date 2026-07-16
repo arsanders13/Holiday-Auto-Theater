@@ -279,26 +279,46 @@ async function searchOmdb() {
   if (dropdown) dropdown.classList.add('hidden');
 
   try {
-    const httpUrl = `http://www.omdbapi.com/?s=${encodeURIComponent(title)}&apikey=${activeKey}`;
-    const proxies = [
-      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-      url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      url => `https://corsproxy.io/?${url}`
-    ];
-
     let data = null;
-    for (const getProxyUrl of proxies) {
+
+    // 1. Direct secure HTTPS fetch (no proxy) if using the default premium key
+    if (activeKey === "b9a5e69d") {
       try {
-        const res = await fetch(getProxyUrl(httpUrl));
-        if (res && res.ok) {
+        const directUrl = `https://www.omdbapi.com/?s=${encodeURIComponent(title)}&apikey=${activeKey}`;
+        const res = await fetch(directUrl);
+        if (res.ok) {
           const json = await res.json();
           if (json && json.Response !== "False") {
             data = json;
-            break;
           }
         }
       } catch (e) {
-        console.warn(e);
+        console.warn("Direct HTTPS query failed, falling back to proxies...", e);
+      }
+    }
+
+    // 2. Proxy failover chain fallback
+    if (!data) {
+      const httpUrl = `http://www.omdbapi.com/?s=${encodeURIComponent(title)}&apikey=${activeKey}`;
+      const proxies = [
+        url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${url}`
+      ];
+
+      for (const getProxyUrl of proxies) {
+        try {
+          const res = await fetch(getProxyUrl(httpUrl));
+          if (res && res.ok) {
+            const json = await res.json();
+            if (json && json.Response !== "False") {
+              data = json;
+              break;
+            }
+          }
+        } catch (e) {
+          console.warn(e);
+        }
       }
     }
 
@@ -341,26 +361,46 @@ async function selectMovieResult(imdbID, apiKey) {
   showAlert("Loading movie details...", "loading");
 
   try {
-    const httpUrl = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&plot=short`;
-    const proxies = [
-      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-      url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      url => `https://corsproxy.io/?${url}`
-    ];
-
     let result = null;
-    for (const getProxyUrl of proxies) {
+
+    // 1. Direct secure HTTPS fetch (no proxy) if using the default premium key
+    if (apiKey === "b9a5e69d") {
       try {
-        const res = await fetch(getProxyUrl(httpUrl));
-        if (res && res.ok) {
+        const directUrl = `https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&plot=short`;
+        const res = await fetch(directUrl);
+        if (res.ok) {
           const json = await res.json();
           if (json && json.Response !== "False") {
             result = json;
-            break;
           }
         }
       } catch (e) {
-        console.warn(e);
+        console.warn("Direct HTTPS details load failed, falling back to proxies...", e);
+      }
+    }
+
+    // 2. Proxy failover chain fallback
+    if (!result) {
+      const httpUrl = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&plot=short`;
+      const proxies = [
+        url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${url}`
+      ];
+
+      for (const getProxyUrl of proxies) {
+        try {
+          const res = await fetch(getProxyUrl(httpUrl));
+          if (res && res.ok) {
+            const json = await res.json();
+            if (json && json.Response !== "False") {
+              result = json;
+              break;
+            }
+          }
+        } catch (e) {
+          console.warn(e);
+        }
       }
     }
 
