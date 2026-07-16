@@ -214,17 +214,18 @@
           <h4><i class="fa-brands fa-imdb icon-imdb"></i> Auto-Fill from IMDb / Movie Database</h4>
           <div class="search-fields-row">
             <div class="search-input-wrap">
-              <input type="text" id="omdb-search-title" placeholder="Type movie title (e.g. Jurassic Park)...">
+              <input type="text" id="omdb-search-title" placeholder="Type movie title (e.g. Deadpool, Inside Out 2, Twisters)...">
+              <div class="search-results-dropdown hidden" id="search-results-dropdown"></div>
             </div>
             <button type="button" class="diner-btn btn-yellow" id="btn-omdb-search">
               <i class="fa-solid fa-magnifying-glass"></i> Search API
             </button>
           </div>
           
-          <!-- Key Option (Optional, defaults to fallback) -->
+          <!-- Key Option -->
           <div class="api-key-toggle-row">
-            <a href="http://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener noreferrer" class="key-info-link"><i class="fa-solid fa-circle-question"></i> Get your own free OMDb API Key</a>
-            <input type="text" id="omdb-api-key" placeholder="Enter key (Optional)" value="" autocomplete="off">
+            <a href="http://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener noreferrer" class="key-info-link"><i class="fa-solid fa-circle-question"></i> Active IMDb Key (Included)</a>
+            <input type="text" id="omdb-api-key" placeholder="Enter key (Optional)" value="b9a5e69d" autocomplete="off">
           </div>
           
           <!-- Search Status / Result Alert -->
