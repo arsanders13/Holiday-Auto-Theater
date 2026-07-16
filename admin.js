@@ -262,43 +262,36 @@ function deleteMovie(index) {
 async function searchOmdb() {
   const titleInput = document.getElementById('omdb-search-title');
   const apiKeyInput = document.getElementById('omdb-api-key');
-  const alertBox = document.getElementById('search-alert');
+  const dropdown = document.getElementById('search-results-dropdown');
   
   const title = titleInput.value.trim();
-  const apiKey = apiKeyInput.value.trim();
+  const rawKey = apiKeyInput.value.trim();
+  const activeKey = (rawKey && rawKey !== "8e6c7c0c") ? rawKey : "b9a5e69d";
 
   if (!title) {
     showAlert("Please enter a movie title to search.", "error");
     return;
   }
 
-  if (!apiKey) {
-    showAlert("An OMDb API Key is required. Please register one for free.", "error");
-    return;
-  }
-
   showAlert("Searching movie database...", "loading");
+  if (dropdown) dropdown.classList.add('hidden');
 
   try {
-    let result = null;
-
-    // Active working theatrical OMDb key (b9a5e69d) used by default unless user inputs custom key
-    const activeKey = (apiKey && apiKey !== "8e6c7c0c") ? apiKey : "b9a5e69d";
-
-    const httpUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${activeKey}&plot=short`;
+    const httpUrl = `http://www.omdbapi.com/?s=${encodeURIComponent(title)}&apikey=${activeKey}`;
     const proxies = [
       url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
       url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
       url => `https://corsproxy.io/?${url}`
     ];
 
+    let data = null;
     for (const getProxyUrl of proxies) {
       try {
         const res = await fetch(getProxyUrl(httpUrl));
         if (res && res.ok) {
-          const data = await res.json();
-          if (data && data.Response !== "False") {
-            result = data;
+          const json = await res.json();
+          if (json && json.Response !== "False") {
+            data = json;
             break;
           }
         }
@@ -307,58 +300,89 @@ async function searchOmdb() {
       }
     }
 
-    // If OMDb didn't return a result, use keyless Open Media Database fallback!
-    if (!result) {
-      console.log("Using keyless media search fallback...");
-      const fallbackRes = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(title)}`);
-      if (fallbackRes.ok) {
-        const items = await fallbackRes.json();
-        if (items && items.length > 0) {
-          const item = items[0].show;
-          const rawSummary = item.summary ? item.summary.replace(/<[^>]*>?/gm, '') : "";
-          result = {
-            Title: item.name,
-            Year: item.premiered ? item.premiered.substring(0, 4) : "",
-            Rated: "PG",
-            Genre: item.genres ? item.genres.join(', ') : "Entertainment",
-            Runtime: item.runtime ? `${item.runtime} min` : "120 min",
-            Plot: rawSummary,
-            imdbID: item.externals && item.externals.imdb ? item.externals.imdb : "",
-            Poster: item.image ? (item.image.original || item.image.medium) : ""
-          };
+    if (!data || !data.Search || data.Search.length === 0) {
+      showAlert(`No theatrical movies found matching "${title}". Please check spelling.`, "error");
+      return;
+    }
+
+    // Populate interactive search dropdown!
+    if (dropdown) {
+      dropdown.innerHTML = '';
+      data.Search.slice(0, 8).forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'search-result-item';
+        row.onclick = () => selectMovieResult(item.imdbID, activeKey);
+        
+        const posterSrc = (item.Poster && item.Poster !== "N/A") ? item.Poster : "https://placehold.co/35x50/0c0f16/ffffff?text=?";
+        row.innerHTML = `
+          <img src="${posterSrc}" class="search-result-thumb" alt="${item.Title}">
+          <div class="search-result-info">
+            <span class="search-result-title">${item.Title}</span>
+            <span class="search-result-meta">${item.Year} • ${item.Type ? item.Type.toUpperCase() : 'MOVIE'}</span>
+          </div>
+        `;
+        dropdown.appendChild(row);
+      });
+      dropdown.classList.remove('hidden');
+      showAlert(`Found ${data.Search.length} matches! Click your movie from the list above:`, "success");
+    }
+  } catch (err) {
+    console.error(err);
+    showAlert("Failed to connect to the movie API database.", "error");
+  }
+}
+
+async function selectMovieResult(imdbID, apiKey) {
+  const dropdown = document.getElementById('search-results-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+  
+  showAlert("Loading movie details...", "loading");
+
+  try {
+    const httpUrl = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&plot=short`;
+    const proxies = [
+      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+      url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+      url => `https://corsproxy.io/?${url}`
+    ];
+
+    let result = null;
+    for (const getProxyUrl of proxies) {
+      try {
+        const res = await fetch(getProxyUrl(httpUrl));
+        if (res && res.ok) {
+          const json = await res.json();
+          if (json && json.Response !== "False") {
+            result = json;
+            break;
+          }
         }
+      } catch (e) {
+        console.warn(e);
       }
     }
 
     if (!result) {
-      showAlert("No movie details found. Please check spelling or fill manually.", "error");
+      showAlert("Could not load details for selected movie.", "error");
       return;
     }
 
-    // Auto-fill form fields!
+    // Auto-fill all form fields!
     document.getElementById('movie-title').value = result.Title || "";
     document.getElementById('movie-year').value = result.Year || "";
     document.getElementById('movie-rating').value = result.Rated || "PG";
     document.getElementById('movie-genre').value = result.Genre || "";
-    
-    // Format runtime string if numeric (e.g. "108 min" -> "1h 48m" or keep as is)
-    const runtime = result.Runtime || "";
-    document.getElementById('movie-duration').value = runtime;
-    
+    document.getElementById('movie-duration').value = result.Runtime || "";
     document.getElementById('movie-plot').value = result.Plot || "";
     document.getElementById('movie-imdb').value = result.imdbID ? `https://www.imdb.com/title/${result.imdbID}/` : "";
     
-    // Process poster
     const posterUrl = result.Poster && result.Poster !== "N/A" ? result.Poster : "";
     document.getElementById('movie-poster').value = posterUrl;
-    
-    // Update live preview in modal
     updatePosterPreview(posterUrl);
-    
-    showAlert(`Successfully imported "${result.Title}" details!`, "success");
-  } catch (err) {
-    console.error(err);
-    showAlert("Failed to connect to the movie API database.", "error");
+
+    showAlert(`Successfully imported "${result.Title} (${result.Year})"!`, "success");
+  } catch (e) {
+    showAlert("Error retrieving details.", "error");
   }
 }
 
