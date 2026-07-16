@@ -2,7 +2,7 @@
   "weeklyStatus": {
     "MON": "Open",
     "TUE": "Open",
-    "WED": "Open",
+    "WED": "Closed",
     "THU": "Open",
     "FRI": "Open",
     "SAT": "Open",
@@ -29,20 +29,24 @@
       ]
     },
     {
-      "title": "Toy Story 5",
-      "year": "2026",
+      "title": "Grease",
+      "year": "1978",
       "rating": "PG",
-      "genre": "Animation, Adventure, Comedy",
-      "duration": "102 min",
-      "plot": "Woody, Buzz, Jessie and the rest of the gang's jobs are challenged when they're introduced to electronics, a new threat to playtime.",
-      "imdbLink": "https://www.imdb.com/title/tt29355505/",
-      "posterImage": "https://m.media-amazon.com/images/M/MV5BZTI1YTBiNmEtYWUxZi00YzFkLWIzNjMtMmZjMmY2NzM0ZWMzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "genre": "Musical / Romance",
+      "duration": "1h 50m",
+      "plot": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+      "imdbLink": "https://www.imdb.com/title/tt0077631/",
+      "posterImage": "assets/poster_grease.jpg",
       "isDoubleFeature": true,
       "featureOrder": "Second Feature",
       "showtimes": [
         {
-          "days": "Mon - Fri",
-          "time": "9:00 pm"
+          "days": "Fri - Sun",
+          "time": "11:10 PM"
+        },
+        {
+          "days": "Mon, Tue, Thu",
+          "time": "11:15 PM"
         }
       ]
     }
