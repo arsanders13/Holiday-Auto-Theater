@@ -222,7 +222,10 @@ window.deleteMovie = deleteMovie;
 function closeModal() {
   document.getElementById('add-movie-modal').classList.add('hidden');
   const dropdown = document.getElementById('search-results-dropdown');
-  if (dropdown) dropdown.classList.add('hidden');
+  if (dropdown) {
+    dropdown.classList.add('hidden');
+    dropdown.innerHTML = '';
+  }
 }
 
 function addShowtimeRow(daysValue = "", timeValue = "") {
@@ -358,7 +361,10 @@ async function searchOmdb() {
 
 async function selectMovieResult(imdbID, apiKey) {
   const dropdown = document.getElementById('search-results-dropdown');
-  if (dropdown) dropdown.classList.add('hidden');
+  if (dropdown) {
+    dropdown.classList.add('hidden');
+    dropdown.innerHTML = '';
+  }
   
   showAlert("Loading movie details...", "loading");
 
