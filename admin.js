@@ -221,6 +221,8 @@ window.deleteMovie = deleteMovie;
 
 function closeModal() {
   document.getElementById('add-movie-modal').classList.add('hidden');
+  const dropdown = document.getElementById('search-results-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
 }
 
 function addShowtimeRow(daysValue = "", timeValue = "") {
@@ -684,6 +686,19 @@ function setupEventListeners() {
   document.getElementById('btn-local-preview').addEventListener('click', handleLocalPreview);
   document.getElementById('btn-download-config').addEventListener('click', handleDownloadConfig);
   document.getElementById('btn-github-deploy').addEventListener('click', handleGithubDeploy);
+
+  // Close search dropdown when clicking anywhere else
+  document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('search-results-dropdown');
+    const searchInput = document.getElementById('omdb-search-title');
+    const searchBtn = document.getElementById('btn-omdb-search');
+    
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+      if (e.target !== dropdown && e.target !== searchInput && e.target !== searchBtn && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    }
+  });
 }
 
 function loadGithubCredentials() {
