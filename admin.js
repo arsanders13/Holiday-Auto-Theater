@@ -42,9 +42,9 @@ async function loadData() {
     }
   }
 
-  // 2. Otherwise, fetch the data.json file from the server/repo
+  // 2. Otherwise, fetch the data.json file from the server/repo (with cache buster)
   try {
-    const response = await fetch('data.json');
+    const response = await fetch('data.json?t=' + new Date().getTime());
     if (!response.ok) throw new Error("Could not fetch data.json");
     currentData = await response.json();
     console.log("Loaded live data from data.json.");
@@ -258,7 +258,9 @@ function deleteMovie(index) {
   if (confirm(`Are you sure you want to remove "${movie.title}" from the listings?`)) {
     currentData.movies.splice(index, 1);
     renderAdminMovieList();
-    showToast(`Removed "${movie.title}" successfully.`);
+    // Auto-save to local preview cache
+    localStorage.setItem('holiday_drivein_preview', JSON.stringify(currentData));
+    showToast(`Removed "${movie.title}". Click "Publish Live Site" below to update the live site!`, "success");
   }
 }
 
