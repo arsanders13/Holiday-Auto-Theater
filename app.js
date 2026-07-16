@@ -135,9 +135,9 @@ function renderScheduleGrid() {
   const today = new Date();
   const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
 
-  // Shift day names to start from today
+  // Shift day names to start from today (displaying 8 days total: today + next 7 days)
   const dayNames = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     const dayIndex = (currentDayOfWeek + i) % 7;
     dayNames.push(standardDayNames[dayIndex]);
   }
