@@ -280,41 +280,58 @@ async function searchOmdb() {
   showAlert("Searching movie database...", "loading");
 
   try {
-    // We construct the URL using HTTP (since OMDb free keys only support HTTP)
-    const httpUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}&plot=short`;
-    
-    // List of secure HTTPS CORS proxies to try in order of preference
-    const proxies = [
-      url => `https://corsproxy.io/?${url}`,
-      url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-    ];
+    let result = null;
 
-    let response = null;
-    let lastError = null;
+    // Try OMDb API first if key provided
+    if (apiKey) {
+      const httpUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}&plot=short`;
+      const proxies = [
+        url => `https://corsproxy.io/?${url}`,
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+      ];
 
-    for (const getProxyUrl of proxies) {
-      const proxyUrl = getProxyUrl(httpUrl);
-      console.log(`Attempting search via proxy: ${proxyUrl}`);
-      try {
-        response = await fetch(proxyUrl);
-        if (response && response.ok) {
-          break; // Success! Break out of the loop
+      for (const getProxyUrl of proxies) {
+        try {
+          const res = await fetch(getProxyUrl(httpUrl));
+          if (res && res.ok) {
+            const data = await res.json();
+            if (data.Response !== "False") {
+              result = data;
+              break;
+            }
+          }
+        } catch (e) {
+          console.warn(e);
         }
-      } catch (e) {
-        console.warn(`Proxy failed to respond: ${proxyUrl}`, e);
-        lastError = e;
       }
     }
 
-    if (!response || !response.ok) {
-      throw new Error("All secure CORS proxies failed to connect.");
+    // If OMDb didn't return a result, use keyless Open Media Database fallback!
+    if (!result) {
+      console.log("Using keyless media search fallback...");
+      const fallbackRes = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(title)}`);
+      if (fallbackRes.ok) {
+        const items = await fallbackRes.json();
+        if (items && items.length > 0) {
+          const item = items[0].show;
+          const rawSummary = item.summary ? item.summary.replace(/<[^>]*>?/gm, '') : "";
+          result = {
+            Title: item.name,
+            Year: item.premiered ? item.premiered.substring(0, 4) : "",
+            Rated: "PG",
+            Genre: item.genres ? item.genres.join(', ') : "Entertainment",
+            Runtime: item.runtime ? `${item.runtime} min` : "120 min",
+            Plot: rawSummary,
+            imdbID: item.externals && item.externals.imdb ? item.externals.imdb : "",
+            Poster: item.image ? (item.image.original || item.image.medium) : ""
+          };
+        }
+      }
     }
-    
-    const result = await response.json();
 
-    if (result.Response === "False") {
-      showAlert(`API Error: ${result.Error}`, "error");
+    if (!result) {
+      showAlert("No movie details found. Please check spelling or fill manually.", "error");
       return;
     }
 
