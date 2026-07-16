@@ -282,8 +282,8 @@ async function searchOmdb() {
   try {
     let result = null;
 
-    // Try OMDb API first if key provided
-    if (apiKey) {
+    // Try OMDb API first if key provided (and not the old expired 8e6c7c0c demo key)
+    if (apiKey && apiKey !== "8e6c7c0c") {
       const httpUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}&plot=short`;
       const proxies = [
         url => `https://corsproxy.io/?${url}`,
