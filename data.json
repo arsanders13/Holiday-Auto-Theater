@@ -2,7 +2,7 @@
   "weeklyStatus": {
     "MON": "Open",
     "TUE": "Open",
-    "WED": "Closed",
+    "WED": "Open",
     "THU": "Open",
     "FRI": "Open",
     "SAT": "Open",
@@ -25,28 +25,6 @@
         {
           "days": "Thurs",
           "time": "9:20 PM"
-        }
-      ]
-    },
-    {
-      "title": "Grease",
-      "year": "1978",
-      "rating": "PG",
-      "genre": "Musical / Romance",
-      "duration": "1h 50m",
-      "plot": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
-      "imdbLink": "https://www.imdb.com/title/tt0077631/",
-      "posterImage": "assets/poster_grease.jpg",
-      "isDoubleFeature": true,
-      "featureOrder": "Second Feature",
-      "showtimes": [
-        {
-          "days": "Fri - Sun",
-          "time": "11:10 PM"
-        },
-        {
-          "days": "Mon, Tue, Thu",
-          "time": "11:15 PM"
         }
       ]
     },
