@@ -131,17 +131,16 @@ function renderScheduleGrid() {
 
   scheduleContainer.innerHTML = '';
 
-  const dayNames = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-
-  // Calculate dates of the current week starting from Monday
+  const standardDayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const today = new Date();
-  const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
 
-  // Get date of the current week's Monday
-  // If today is Sunday (0), subtract 6 days. Otherwise, subtract (currentDayOfWeek - 1) days.
-  const daysToSubtract = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1;
-  const mondayDate = new Date(today);
-  mondayDate.setDate(today.getDate() - daysToSubtract);
+  // Shift day names to start from today
+  const dayNames = [];
+  for (let i = 0; i < 7; i++) {
+    const dayIndex = (currentDayOfWeek + i) % 7;
+    dayNames.push(standardDayNames[dayIndex]);
+  }
 
   dayNames.forEach((name, index) => {
     // Determine status and class dynamically from configuration
@@ -149,16 +148,16 @@ function renderScheduleGrid() {
     const isClosed = status.toLowerCase() === "closed";
     const boxClass = isClosed ? "closed-day" : "active-day";
 
-    // Calculate date for this day box
-    const thisDay = new Date(mondayDate);
-    thisDay.setDate(mondayDate.getDate() + index);
+    // Calculate date for this day box (today + index)
+    const thisDay = new Date(today);
+    thisDay.setDate(today.getDate() + index);
 
     // Format date string (e.g. "Jun 15")
     const options = { month: 'short', day: 'numeric' };
     const dateString = thisDay.toLocaleDateString('en-US', options);
 
-    // Check if this day is today to highlight it
-    const isToday = today.toDateString() === thisDay.toDateString();
+    // This day is today if it's the first element (index === 0)
+    const isToday = index === 0;
     const todayBadge = isToday ? '<span class="today-badge">TODAY</span>' : '';
 
     const dayBox = document.createElement('div');
