@@ -156,7 +156,9 @@ function openAddModal() {
   // Reset search alert
   const alert = document.getElementById('search-alert');
   alert.classList.add('hidden');
-  document.getElementById('omdb-search-title').value = "";
+  // Force active key into input field
+  const keyInput = document.getElementById('omdb-api-key');
+  if (keyInput) keyInput.value = "b9a5e69d";
   
   // Clear and add one empty showtime row
   const showtimesContainer = document.getElementById('showtimes-rows-container');
