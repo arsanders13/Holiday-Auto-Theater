@@ -2,7 +2,7 @@
   "weeklyStatus": {
     "MON": "Open",
     "TUE": "Open",
-    "WED": "Closed",
+    "WED": "Open",
     "THU": "Open",
     "FRI": "Open",
     "SAT": "Open",
@@ -29,24 +29,20 @@
       ]
     },
     {
-      "title": "Grease",
-      "year": "1978",
-      "rating": "PG",
-      "genre": "Musical / Romance",
-      "duration": "1h 50m",
-      "plot": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
-      "imdbLink": "https://www.imdb.com/title/tt0077631/",
-      "posterImage": "assets/poster_grease.jpg",
+      "title": "Toy Story 2",
+      "year": "1999",
+      "rating": "G",
+      "genre": "Animation, Adventure, Comedy",
+      "duration": "92 min",
+      "plot": "When Woody is stolen by a toy collector, Buzz and his friends set out on a rescue mission to save Woody before he becomes a museum toy property with his roundup gang Jessie, Prospector, and Bullseye.",
+      "imdbLink": "https://www.imdb.com/title/tt0120363/",
+      "posterImage": "https://m.media-amazon.com/images/M/MV5BNzVmODlhMDEtY2YxZi00OTVjLTlkNTktN2Q2OTRlM2I4M2FhXkEyXkFqcGc@._V1_SX300.jpg",
       "isDoubleFeature": true,
-      "featureOrder": "Second Feature",
+      "featureOrder": "First Feature",
       "showtimes": [
         {
-          "days": "Fri - Sun",
-          "time": "11:10 PM"
-        },
-        {
-          "days": "Mon, Tue, Thu",
-          "time": "11:15 PM"
+          "days": "dd",
+          "time": "dd"
         }
       ]
     }
