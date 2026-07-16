@@ -75,7 +75,7 @@ async function loadSiteData() {
 
   // 2. Fetch live data.json from repo
   try {
-    const response = await fetch('data.json');
+    const response = await fetch('data.json?t=' + new Date().getTime());
     if (!response.ok) throw new Error("Network response not ok");
     liveData = await response.json();
     console.log("Loaded live site configuration from data.json.");
