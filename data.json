@@ -5,7 +5,7 @@
     "WED": "Open",
     "THU": "Open",
     "FRI": "Open",
-    "SAT": "Open",
+    "SAT": "Closed",
     "SUN": "Open"
   },
   "announcement": "★ NOW SHOWING • CHECK WEEKLY SCHEDULE GRID BELOW FOR OPEN DAYS ★ SOUND ON 88.3 FM ★ GATES OPEN AT 7:30 PM ★ SHOWTIME AT DUSK ★ POPCORN IS POPPING! ★",
@@ -43,6 +43,24 @@
         {
           "days": "dd",
           "time": "dd"
+        }
+      ]
+    },
+    {
+      "title": "The Odyssey",
+      "year": "2026",
+      "rating": "R",
+      "genre": "Adventure, Drama, Fantasy",
+      "duration": "172 min",
+      "plot": "After the Trojan War, Odysseus faces a dangerous voyage back to Ithaca, meeting creatures like the Cyclops Polyphemus, Sirens, and Calypso along the way.",
+      "imdbLink": "https://www.imdb.com/title/tt33764258/",
+      "posterImage": "https://m.media-amazon.com/images/M/MV5BNTcyNmJlZmQtNDUwYy00NDBjLTg1NGQtYTY2Y2UxMWM3NmI1XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "isDoubleFeature": false,
+      "featureOrder": "",
+      "showtimes": [
+        {
+          "days": "mon - sun",
+          "time": "9:00 pm"
         }
       ]
     }
